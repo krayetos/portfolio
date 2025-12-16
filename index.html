@@ -7,7 +7,7 @@
     <meta name="keywords" content="Full-Stack Developer, AR/VR, React, Python, Flask, Unreal Engine">
     <meta name="author" content="Riyas Manikodi">
     <title>Riyas Manikodi - 3D Resume Portfolio</title>
-    
+
     <style>
         /* ========== CSS VARIABLES ========== */
         :root {
@@ -189,13 +189,13 @@
             height: 200%;
             background: radial-gradient(circle, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
+            animation: moveBackground 20s linear infinite alternate;
             pointer-events: none;
         }
 
         @keyframes moveBackground {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            100% { transform: translate(-50px, -50px); }
         }
 
         .hero-content {
@@ -217,7 +217,8 @@
             background-clip: text;
             line-height: 1.2;
             opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(-40px);
+            animation: fadeInDown 0.8s ease forwards;
         }
 
         .hero-text p {
@@ -226,6 +227,7 @@
             margin-bottom: 30px;
             max-width: 500px;
             opacity: 0;
+            transform: translateY(40px);
             animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
@@ -234,6 +236,7 @@
             gap: 20px;
             flex-wrap: wrap;
             opacity: 0;
+            transform: translateY(40px);
             animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
@@ -304,7 +307,8 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
+            transform: translateY(60px);
+            animation: fadeInUp 0.9s ease 0.6s forwards, floatY 6s ease-in-out 1.5s infinite alternate;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
@@ -340,7 +344,7 @@
             font-weight: 700;
             color: var(--color-primary);
             z-index: 20;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite alternate;
         }
 
         .hotspot:hover {
@@ -352,8 +356,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
-            50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.9); }
+            0% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); transform: translateY(0); }
+            100% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.9); transform: translateY(-4px); }
         }
 
         /* ========== INFO PANEL ========== */
@@ -371,14 +375,16 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
         }
 
         .hero-info.show {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            transform: translateY(0);
         }
 
         .hero-info h3 {
@@ -413,11 +419,11 @@
             transform: translateX(5px);
         }
 
-        /* ========== ANIMATIONS ========== */
+        /* ========== ANIMATIONS (TOP↔BOTTOM, BACK & FORTH) ========== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(60px);
             }
             to {
                 opacity: 1;
@@ -425,9 +431,27 @@
             }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatY {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes floatX {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+            100% { transform: translateX(0); }
         }
 
         /* ========== SKILLS SECTION ========== */
@@ -445,7 +469,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(60px);
             transition: all 0.6s ease;
         }
 
@@ -469,12 +493,13 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(60px);
         }
 
         .skill-card.visible {
             opacity: 1;
             transform: translateY(0);
+            animation: floatY 5s ease-in-out 0.5s infinite alternate;
         }
 
         .skill-card::before {
@@ -503,6 +528,7 @@
             font-size: 48px;
             margin-bottom: 20px;
             display: block;
+            animation: floatX 4s ease-in-out infinite alternate;
         }
 
         .skill-card h3 {
@@ -536,12 +562,13 @@
             overflow: hidden;
             transition: all 0.3s ease;
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(60px);
         }
 
         .project-card.visible {
             opacity: 1;
             transform: translateY(0);
+            animation: floatY 6s ease-in-out 0.5s infinite alternate;
         }
 
         .project-card:hover {
@@ -630,6 +657,7 @@
             color: var(--color-primary);
             transition: all 0.3s ease;
             cursor: pointer;
+            animation: floatX 5s ease-in-out infinite alternate;
         }
 
         .tech-tag:hover {
@@ -658,13 +686,14 @@
             margin-bottom: 30px;
             position: relative;
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateY(60px);
             transition: all 0.5s ease;
         }
 
         .timeline-item.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
+            animation: floatY 5s ease-in-out 1s infinite alternate;
         }
 
         .timeline-item::before {
@@ -689,7 +718,7 @@
             height: 24px;
             border: 1px solid rgba(0, 212, 255, 0.3);
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite alternate;
         }
 
         .timeline-item:last-child::after {
@@ -786,6 +815,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             align-self: flex-start;
+            animation: floatX 5s ease-in-out infinite alternate;
         }
 
         .form-submit:hover {
@@ -1103,12 +1133,12 @@
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">⚙️</div>
-                        <h3>Programming & Game Logic</h3>
+                        <h3>Programming &amp; Game Logic</h3>
                         <p>Specialized in full-stack development with Python, JavaScript, React, Flask, and database design. Experience building AR/VR applications using Unreal Engine blueprints.</p>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">🎨</div>
-                        <h3>Creative & AR/VR</h3>
+                        <h3>Creative &amp; AR/VR</h3>
                         <p>Certified in AR/VR development with Unreal Engine 5. Skilled in 3D modeling, animation, and cinematic storytelling.</p>
                     </div>
                 </div>
@@ -1306,7 +1336,7 @@
             });
         });
 
-        /* INTERSECTION OBSERVER - FADE IN ANIMATIONS */
+        /* INTERSECTION OBSERVER - BOTTOM→TOP + FLOAT EFFECTS */
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
