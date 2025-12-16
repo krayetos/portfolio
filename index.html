@@ -7,7 +7,9 @@
     <meta name="keywords" content="Full-Stack Developer, AR/VR, React, Python, Flask, Unreal Engine">
     <meta name="author" content="Riyas Manikodi">
     <title>Riyas Manikodi - 3D Resume Portfolio</title>
+    
     <style>
+        /* ========== CSS VARIABLES ========== */
         :root {
             --color-bg-primary: #0a0e27;
             --color-bg-secondary: #1a1f3a;
@@ -19,6 +21,7 @@
             --color-success: #00ff88;
         }
 
+        /* ========== GLOBAL STYLES ========== */
         * {
             margin: 0;
             padding: 0;
@@ -37,6 +40,7 @@
             overflow-x: hidden;
         }
 
+        /* ========== CUSTOM CURSOR ========== */
         .cursor {
             width: 20px;
             height: 20px;
@@ -67,6 +71,7 @@
             border-color: var(--color-accent);
         }
 
+        /* ========== SCROLL PROGRESS BAR ========== */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -78,12 +83,14 @@
             transition: width 0.1s ease;
         }
 
+        /* ========== CONTAINER ========== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* ========== NAVIGATION ========== */
         nav {
             position: fixed;
             top: 0;
@@ -93,7 +100,7 @@
             z-index: 1000;
             padding: 15px 0;
             border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         nav.scrolled {
@@ -115,7 +122,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .logo:hover {
@@ -131,7 +138,7 @@
         nav a {
             color: var(--color-text);
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             font-size: 14px;
             position: relative;
             font-weight: 500;
@@ -145,7 +152,7 @@
             width: 0;
             height: 2px;
             background: var(--color-primary);
-            transition: width 0.25s ease;
+            transition: width 0.3s ease;
         }
 
         nav a:hover::after {
@@ -164,6 +171,7 @@
             width: 100%;
         }
 
+        /* ========== HERO SECTION ========== */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -208,6 +216,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         .hero-text p {
@@ -215,14 +225,19 @@
             color: var(--color-text-secondary);
             margin-bottom: 30px;
             max-width: 500px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
         .cta-buttons {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
+        /* ========== BUTTONS ========== */
         .btn {
             padding: 14px 32px;
             border: none;
@@ -230,7 +245,7 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             position: relative;
@@ -247,7 +262,7 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -50%);
-            transition: width 0.4s, height 0.4s;
+            transition: width 0.6s, height 0.6s;
         }
 
         .btn:hover::before {
@@ -277,6 +292,7 @@
             transform: translateY(-3px);
         }
 
+        /* ========== 3D HERO ROOM ========== */
         .hero-3d {
             height: 500px;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(255, 0, 110, 0.05));
@@ -287,8 +303,9 @@
             border: 2px solid rgba(0, 212, 255, 0.2);
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            animation: floatY 4s ease-in-out infinite;
         }
 
         .hero-3d:hover {
@@ -305,6 +322,7 @@
             padding: 20px;
         }
 
+        /* ========== HOTSPOTS ========== */
         .hotspot {
             position: absolute;
             width: 28px;
@@ -313,7 +331,7 @@
             border: 2px solid var(--color-primary);
             background: rgba(0, 212, 255, 0.15);
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
             display: flex;
             align-items: center;
@@ -322,7 +340,7 @@
             font-weight: 700;
             color: var(--color-primary);
             z-index: 20;
-            animation: pulse 1.5s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite;
         }
 
         .hotspot:hover {
@@ -334,16 +352,11 @@
         }
 
         @keyframes pulse {
-            0%, 100% { 
-                box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-                transform: translateY(0);
-            }
-            50% { 
-                box-shadow: 0 0 25px rgba(0, 212, 255, 0.9);
-                transform: translateY(-4px);
-            }
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.9); }
         }
 
+        /* ========== INFO PANEL ========== */
         .hero-info {
             position: absolute;
             bottom: 30px;
@@ -358,16 +371,14 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
         }
 
         .hero-info.show {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            transform: translateY(0);
         }
 
         .hero-info h3 {
@@ -393,7 +404,7 @@
             color: var(--color-primary);
             text-decoration: none;
             font-size: 12px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .hero-info a:hover {
@@ -402,10 +413,11 @@
             transform: translateX(5px);
         }
 
-        @keyframes slideUpIn {
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -413,60 +425,12 @@
             }
         }
 
-        @keyframes slideDownIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes floatY {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        @keyframes floatX {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(6px); }
-        }
-
-        .animate-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .animate-scroll.active {
-            animation: slideUpIn 0.5s ease forwards;
-        }
-
-        .animate-scroll.scroll-up {
-            animation: slideDownIn 0.5s ease forwards;
-        }
-
-        .animate-card {
-            opacity: 0;
-            transform: scale(0.85);
-        }
-
-        .animate-card.active {
-            animation: scaleIn 0.5s ease forwards;
-        }
-
+        /* ========== SKILLS SECTION ========== */
         #skills {
             padding: 100px 0;
         }
@@ -480,6 +444,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .skills-grid {
@@ -493,10 +465,16 @@
             border: 1px solid rgba(0, 212, 255, 0.2);
             border-radius: 16px;
             padding: 40px;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            animation: floatY 4s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .skill-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .skill-card::before {
@@ -508,7 +486,7 @@
             height: 100%;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), transparent);
             opacity: 0;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.3s ease;
         }
 
         .skill-card:hover::before {
@@ -525,7 +503,6 @@
             font-size: 48px;
             margin-bottom: 20px;
             display: block;
-            animation: floatX 3s ease-in-out infinite;
         }
 
         .skill-card h3 {
@@ -540,6 +517,7 @@
             line-height: 1.8;
         }
 
+        /* ========== PROJECTS SECTION ========== */
         #projects {
             padding: 100px 0;
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(26, 31, 58, 0.3));
@@ -556,8 +534,14 @@
             border: 1px solid rgba(0, 212, 255, 0.2);
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.25s ease;
-            animation: floatY 4.5s ease-in-out infinite;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-card:hover {
@@ -595,7 +579,7 @@
             text-decoration: none;
             border-radius: 6px;
             font-size: 12px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
@@ -605,6 +589,7 @@
             transform: translateY(-2px);
         }
 
+        /* ========== ABOUT SECTION ========== */
         #about {
             padding: 100px 0;
         }
@@ -643,9 +628,8 @@
             border-radius: 20px;
             font-size: 12px;
             color: var(--color-primary);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
-            animation: floatX 3.5s ease-in-out infinite;
         }
 
         .tech-tag:hover {
@@ -654,6 +638,7 @@
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
+        /* ========== TIMELINE ========== */
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -672,7 +657,14 @@
         .timeline-item {
             margin-bottom: 30px;
             position: relative;
-            animation: floatY 4s ease-in-out infinite;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .timeline-item::before {
@@ -697,7 +689,7 @@
             height: 24px;
             border: 1px solid rgba(0, 212, 255, 0.3);
             border-radius: 50%;
-            animation: pulse 1.5s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite;
         }
 
         .timeline-item:last-child::after {
@@ -723,6 +715,7 @@
             color: var(--color-text-secondary);
         }
 
+        /* ========== CONTACT SECTION ========== */
         #contact {
             padding: 100px 0;
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(26, 31, 58, 0.3));
@@ -760,7 +753,7 @@
             color: var(--color-text);
             font-family: inherit;
             font-size: 14px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
@@ -791,7 +784,7 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             align-self: flex-start;
         }
 
@@ -804,6 +797,7 @@
             transform: translateY(-1px);
         }
 
+        /* ========== FOOTER ========== */
         footer {
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.9), rgba(26, 31, 58, 0.5));
             border-top: 1px solid rgba(0, 212, 255, 0.1);
@@ -823,7 +817,7 @@
         .social-links a {
             color: var(--color-primary);
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             font-size: 18px;
             font-weight: 500;
         }
@@ -833,6 +827,7 @@
             color: var(--color-accent);
         }
 
+        /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 768px) {
             body {
                 cursor: auto;
@@ -897,6 +892,7 @@
             }
 
             .hotspot {
+                animation: none !important;
                 width: 32px;
                 height: 32px;
                 font-size: 16px;
@@ -945,6 +941,7 @@
             }
         }
 
+        /* ========== PRINT STYLES ========== */
         @media print {
             nav,
             footer,
@@ -965,6 +962,7 @@
             }
         }
 
+        /* ========== ACCESSIBILITY ========== */
         .skip-to-content {
             position: absolute;
             top: -40px;
@@ -988,6 +986,7 @@
             outline-offset: 2px;
         }
 
+        /* ========== UTILITY CLASSES ========== */
         .text-center {
             text-align: center;
         }
@@ -1003,13 +1002,17 @@
 </head>
 
 <body>
+    <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
+    <!-- Custom cursor elements -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
+    <!-- Scroll progress bar -->
     <div class="scroll-progress"></div>
 
+    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">RM</div>
@@ -1023,7 +1026,9 @@
         </div>
     </nav>
 
+    <!-- Main content -->
     <main id="main-content">
+        <!-- Hero Section -->
         <section id="hero">
             <div class="container">
                 <div class="hero-content">
@@ -1039,39 +1044,46 @@
 
                     <div class="hero-3d">
                         <svg class="hero-room" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D Room Visualization">
+                            <!-- Floor -->
                             <g>
                                 <path d="M 150 300 L 450 300 L 480 250 L 120 250 Z" fill="#5e5240" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
                                 <rect x="150" y="300" width="300" height="100" fill="#4a4033" opacity="0.8"/>
                             </g>
 
+                            <!-- Computer Desk -->
                             <g>
                                 <rect x="240" y="160" width="120" height="80" fill="#1a1f3a" stroke="rgba(0,212,255,0.4)" stroke-width="2"/>
                                 <rect x="245" y="165" width="110" height="70" fill="#0a0e27" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
                                 <text x="300" y="205" font-size="20" text-anchor="middle" fill="rgba(0,212,255,0.3)">💻</text>
                             </g>
 
+                            <!-- Bookshelf -->
                             <g>
                                 <rect x="80" y="220" width="80" height="160" fill="#3a3a2a" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
                                 <line x1="190" y1="250" x2="160" y2="250" stroke="rgba(0,212,255,0.15)" stroke-width="2"/>
                                 <text x="120" y="300" font-size="18" text-anchor="middle" fill="rgba(0,212,255,0.4)">📚</text>
                             </g>
 
+                            <!-- Media Center -->
                             <g>
                                 <rect x="460" y="140" width="90" height="140" fill="#2a1f3a" stroke="rgba(255,0,110,0.3)" stroke-width="2"/>
                                 <text x="505" y="210" font-size="24" text-anchor="middle" fill="rgba(255,0,110,0.5)">🎮</text>
                             </g>
 
+                            <!-- Plant -->
                             <g>
                                 <circle cx="140" cy="380" r="25" fill="#2a5a2a" opacity="0.7"/>
                                 <text x="140" y="385" font-size="20" text-anchor="middle" fill="#4a8a4a">🌿</text>
                             </g>
                         </svg>
 
+                        <!-- Interactive hotspots -->
                         <button class="hotspot" data-section="projects" style="top: 35%; left: 50%;" aria-label="View Projects"></button>
                         <button class="hotspot" data-section="skills" style="top: 50%; left: 20%;" aria-label="View Skills"></button>
                         <button class="hotspot" data-section="about" style="top: 75%; left: 50%;" aria-label="About Me"></button>
                     </div>
 
+                    <!-- Info panel -->
                     <div class="hero-info" role="tooltip">
                         <div></div>
                     </div>
@@ -1079,34 +1091,36 @@
             </div>
         </section>
 
+        <!-- Skills Section -->
         <section id="skills">
             <div class="container">
-                <h2 class="section-title animate-scroll">Technical Skills</h2>
+                <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
-                    <div class="skill-card animate-card">
+                    <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">🔧</div>
                         <h3>Technical Support</h3>
                         <p>Expert in system troubleshooting, hardware diagnostics, and IT infrastructure management. Proficient with Windows, Mac, networking, and enterprise support systems.</p>
                     </div>
-                    <div class="skill-card animate-card">
+                    <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">⚙️</div>
-                        <h3>Programming &amp; Game Logic</h3>
+                        <h3>Programming & Game Logic</h3>
                         <p>Specialized in full-stack development with Python, JavaScript, React, Flask, and database design. Experience building AR/VR applications using Unreal Engine blueprints.</p>
                     </div>
-                    <div class="skill-card animate-card">
+                    <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">🎨</div>
-                        <h3>Creative &amp; AR/VR</h3>
+                        <h3>Creative & AR/VR</h3>
                         <p>Certified in AR/VR development with Unreal Engine 5. Skilled in 3D modeling, animation, and cinematic storytelling.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section id="projects">
             <div class="container">
-                <h2 class="section-title animate-scroll">Featured Projects</h2>
+                <h2 class="section-title">Featured Projects</h2>
                 <div class="projects-grid">
-                    <div class="project-card animate-card">
+                    <div class="project-card">
                         <div class="project-content">
                             <h3>Video Steganography</h3>
                             <p>A secure communication tool that embeds hidden video files using Python and encryption protocols.</p>
@@ -1115,7 +1129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card animate-card">
+                    <div class="project-card">
                         <div class="project-content">
                             <h3>Farmers E-Market</h3>
                             <p>Platform enabling farmers to sell produce directly. Features product listings and delivery integration.</p>
@@ -1124,7 +1138,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card animate-card">
+                    <div class="project-card">
                         <div class="project-content">
                             <h3>3D Portfolio</h3>
                             <p>Interactive resume website showcasing technical skills with real-time 3D visualization.</p>
@@ -1137,10 +1151,11 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about">
             <div class="container">
                 <div class="about-content">
-                    <div class="about-text animate-scroll">
+                    <div class="about-text">
                         <h2>About Me</h2>
                         <p>I'm a self-taught full-stack developer with a passion for creating immersive 3D experiences. With an MCA from Anna University and hands-on experience in AR/VR development, I bridge the gap between creative design and technical implementation.</p>
                         <div class="tech-stack">
@@ -1154,7 +1169,7 @@
                         </div>
                     </div>
 
-                    <div class="animate-scroll">
+                    <div>
                         <h2 style="color: var(--color-primary); margin-bottom: 30px;">Experience Timeline</h2>
                         <div class="timeline">
                             <div class="timeline-item">
@@ -1178,10 +1193,11 @@
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact">
             <div class="container">
-                <h2 class="section-title animate-scroll">Get In Touch</h2>
-                <div class="contact-container animate-scroll">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-container">
                     <form action="https://formspree.io/f/mnneyevy" method="POST" class="contact-form" novalidate>
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -1207,6 +1223,7 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="social-links">
@@ -1218,7 +1235,9 @@
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
+        /* CUSTOM CURSOR */
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
 
@@ -1236,6 +1255,7 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
         });
 
+        /* SCROLL PROGRESS BAR */
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1243,20 +1263,15 @@
             document.querySelector('.scroll-progress').style.width = scrolled + '%';
         });
 
+        /* NAVIGATION - ACTIVE LINK */
         const nav = document.querySelector('nav');
-        let lastScrollY = 0;
 
         window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > 50) {
+            if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
-
-            updateScrollAnimations(currentScrollY > lastScrollY);
-            lastScrollY = currentScrollY;
             updateActiveNav();
         });
 
@@ -1280,28 +1295,7 @@
 
         updateActiveNav();
 
-        function updateScrollAnimations(scrollingDown) {
-            const animateElements = document.querySelectorAll('.animate-scroll, .animate-card');
-
-            animateElements.forEach((el) => {
-                const rect = el.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-
-                if (isVisible) {
-                    el.classList.remove('active', 'scroll-up');
-                    void el.offsetWidth;
-
-                    if (scrollingDown) {
-                        el.classList.add('active');
-                    } else {
-                        el.classList.add('scroll-up');
-                    }
-                } else {
-                    el.classList.remove('active', 'scroll-up');
-                }
-            });
-        }
-
+        /* SMOOTH SCROLL */
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1312,6 +1306,21 @@
             });
         });
 
+        /* INTERSECTION OBSERVER - FADE IN ANIMATIONS */
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-title, .skill-card, .project-card, .timeline-item').forEach((el) => {
+            observer.observe(el);
+        });
+
+        /* HOTSPOT INFO PANEL */
         const roomInfo = {
             projects: { title: 'Projects', text: 'Video Steganography, Farmers E-Market, 3D portfolio with real-time visualization.', link: 'projects', linkText: 'View Projects' },
             skills: { title: 'Skills', text: 'Full-Stack Development, React, Python, Flask, MySQL, AR/VR, Unreal Engine 5', link: 'skills', linkText: 'See Skills' },
@@ -1353,13 +1362,16 @@
         });
         infoPanel.addEventListener('mouseleave', hideInfoPanel);
 
+        /* CONSOLE WELCOME MESSAGE */
         console.log(
             '%c Portfolio Website Loaded Successfully!',
             'color: #00d4ff; font-size: 20px; font-weight: bold;'
         );
-        console.log('%cOptimized Fast Animations!', 'color: #00ff88; font-size: 14px;');
-        console.log('%cScroll UP/DOWN animations with reduced delays!', 'color: #ff006e; font-size: 14px;');
+        console.log('%cDeveloped by Riyas Manikodi', 'color: #ff006e; font-size: 14px;');
+        console.log('%cGitHub: https://github.com/Riyasmanikodi', 'color: #a0a0a0; font-size: 12px;');
+        console.log('%cFormspree Contact Form Integration', 'color: #00ff88; font-size: 12px;');
 
+        /* PERFORMANCE MONITORING */
         window.addEventListener('load', () => {
             const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
             console.log('%c Page loaded in ' + loadTime + 'ms', 'color: #00ff88; font-size: 12px;');
