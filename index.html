@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Riyas Manikodi - Full-Stack Developer, AR/VR Specialist, Technical Support Engineer">
+    <meta name="description" content="Riyas Manikodi - Full-Stack Developer, AR/VR Specialist, Technical Support Engineer">
     <meta name="keywords" content="Full-Stack Developer, AR/VR, React, Python, Flask, Unreal Engine">
     <meta name="author" content="Riyas Manikodi">
     <title>Riyas Manikodi - 3D Resume Portfolio</title>
+    
     <style>
+        /* ========== CSS VARIABLES ========== */
         :root {
             --color-bg-primary: #0a0e27;
             --color-bg-secondary: #1a1f3a;
@@ -19,10 +19,9 @@
             --color-text-secondary: #a0a0a0;
             --color-accent: #ff006e;
             --color-success: #00ff88;
-            --color-warning: #ffd700;
-            --color-error: #ff4444;
         }
 
+        /* ========== GLOBAL STYLES ========== */
         * {
             margin: 0;
             padding: 0;
@@ -39,19 +38,9 @@
             color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
-            position: relative;
         }
 
-        button,
-        .btn,
-        .logo {
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-        }
-
-        /* CUSTOM CURSOR */
+        /* ========== CUSTOM CURSOR ========== */
         .cursor {
             width: 20px;
             height: 20px;
@@ -82,26 +71,26 @@
             border-color: var(--color-accent);
         }
 
-        /* SCROLL PROGRESS BAR */
+        /* ========== SCROLL PROGRESS BAR ========== */
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
-            width: 0%;
+            width: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
             z-index: 10000;
             transition: width 0.1s ease;
         }
 
-        /* CONTAINER */
+        /* ========== CONTAINER ========== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* NAVIGATION */
+        /* ========== NAVIGATION ========== */
         nav {
             position: fixed;
             top: 0;
@@ -182,8 +171,8 @@
             width: 100%;
         }
 
-        /* HERO SECTION */
-        .hero {
+        /* ========== HERO SECTION ========== */
+        #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -193,7 +182,7 @@
             overflow: hidden;
         }
 
-        .hero::before {
+        #hero::before {
             content: '';
             position: absolute;
             width: 200%;
@@ -205,13 +194,8 @@
         }
 
         @keyframes moveBackground {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(50px, 50px);
-            }
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .hero-content {
@@ -220,6 +204,7 @@
             gap: 60px;
             align-items: center;
             z-index: 10;
+            width: 100%;
         }
 
         .hero-text h1 {
@@ -252,7 +237,7 @@
             animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
-        /* BUTTONS */
+        /* ========== BUTTONS ========== */
         .btn {
             padding: 14px 32px;
             border: none;
@@ -296,10 +281,6 @@
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
 
-        .btn-primary:active {
-            transform: translateY(-1px);
-        }
-
         .btn-secondary {
             background: transparent;
             color: var(--color-primary);
@@ -311,7 +292,7 @@
             transform: translateY(-3px);
         }
 
-        /* 3D HERO ROOM */
+        /* ========== 3D HERO ROOM ========== */
         .hero-3d {
             height: 500px;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(255, 0, 110, 0.05));
@@ -335,11 +316,13 @@
         .hero-room {
             width: 100%;
             height: 100%;
+            max-width: 600px;
+            max-height: 500px;
             object-fit: contain;
             padding: 20px;
         }
 
-        /* HOTSPOTS */
+        /* ========== HOTSPOTS ========== */
         .hotspot {
             position: absolute;
             width: 28px;
@@ -368,11 +351,12 @@
             transform: scale(1.25);
         }
 
-        .hotspot.active {
-            transform: scale(1.1);
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.9); }
         }
 
-        /* INFO PANEL */
+        /* ========== INFO PANEL ========== */
         .hero-info {
             position: absolute;
             bottom: 30px;
@@ -429,25 +413,12 @@
             transform: translateX(5px);
         }
 
-        /* ANIMATIONS */
-        @keyframes pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-            }
-
-            50% {
-                box-shadow: 0 0 25px rgba(0, 212, 255, 0.9);
-            }
-        }
-
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -455,16 +426,11 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* SKILLS SECTION */
+        /* ========== SKILLS SECTION ========== */
         #skills {
             padding: 100px 0;
         }
@@ -551,7 +517,7 @@
             line-height: 1.8;
         }
 
-        /* PROJECTS SECTION */
+        /* ========== PROJECTS SECTION ========== */
         #projects {
             padding: 100px 0;
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(26, 31, 58, 0.3));
@@ -623,7 +589,7 @@
             transform: translateY(-2px);
         }
 
-        /* ABOUT SECTION */
+        /* ========== ABOUT SECTION ========== */
         #about {
             padding: 100px 0;
         }
@@ -672,7 +638,7 @@
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
-        /* TIMELINE */
+        /* ========== TIMELINE ========== */
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -749,7 +715,7 @@
             color: var(--color-text-secondary);
         }
 
-        /* CONTACT SECTION */
+        /* ========== CONTACT SECTION ========== */
         #contact {
             padding: 100px 0;
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(26, 31, 58, 0.3));
@@ -831,13 +797,7 @@
             transform: translateY(-1px);
         }
 
-        .form-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* FOOTER */
+        /* ========== FOOTER ========== */
         footer {
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.9), rgba(26, 31, 58, 0.5));
             border-top: 1px solid rgba(0, 212, 255, 0.1);
@@ -867,37 +827,7 @@
             color: var(--color-accent);
         }
 
-        /* UTILITY CLASSES */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-4 {
-            margin-top: 40px;
-        }
-
-        .mb-4 {
-            margin-bottom: 40px;
-        }
-
-        /* LOADING ANIMATION */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 212, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--color-primary);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* RESPONSIVE DESIGN */
+        /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 768px) {
             body {
                 cursor: auto;
@@ -985,10 +915,6 @@
             .form-submit {
                 width: 100%;
             }
-
-            .timeline {
-                padding-left: 20px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1009,11 +935,14 @@
             .project-card {
                 padding: 25px;
             }
+
+            .timeline {
+                padding-left: 20px;
+            }
         }
 
-        /* PRINT STYLES */
+        /* ========== PRINT STYLES ========== */
         @media print {
-
             nav,
             footer,
             .cursor,
@@ -1033,7 +962,7 @@
             }
         }
 
-        /* ACCESSIBILITY */
+        /* ========== ACCESSIBILITY ========== */
         .skip-to-content {
             position: absolute;
             top: -40px;
@@ -1055,6 +984,19 @@
         textarea:focus {
             outline: 2px solid var(--color-primary);
             outline-offset: 2px;
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 40px;
+        }
+
+        .mb-4 {
+            margin-bottom: 40px;
         }
     </style>
 </head>
@@ -1093,67 +1035,57 @@
                     <div class="hero-text">
                         <h1>Hi, I'm Riyas Manikodi</h1>
                         <p>Technical Support Engineer | Junior Software Developer | AR/VR Specialist</p>
-                        <p style="font-size: 14px; margin-top: 20px;">Transforming ideas into interactive 3D experiences
-                            with React, Python, and Unreal Engine</p>
+                        <p style="font-size: 14px; margin-top: 20px;">Transforming ideas into interactive 3D experiences with React, Python, and Unreal Engine</p>
                         <div class="cta-buttons">
                             <a href="#projects" class="btn btn-primary">View My Work</a>
-                            <a href="https://github.com/Riyasmanikodi" class="btn btn-secondary" target="_blank"
-                                rel="noopener noreferrer">GitHub Profile</a>
+                            <a href="https://github.com/Riyasmanikodi" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
                         </div>
                     </div>
+
                     <div class="hero-3d">
-                        <svg class="hero-room" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img"
-                            aria-label="3D Room Visualization">
+                        <svg class="hero-room" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D Room Visualization">
                             <!-- Floor -->
                             <g>
-                                <path d="M 150 300 L 450 300 L 480 250 L 120 250 Z" fill="#5e5240"
-                                    stroke="rgba(0,212,255,0.3)" stroke-width="1" />
-                                <rect x="150" y="300" width="300" height="100" fill="#4a4033" opacity="0.8" />
+                                <path d="M 150 300 L 450 300 L 480 250 L 120 250 Z" fill="#5e5240" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+                                <rect x="150" y="300" width="300" height="100" fill="#4a4033" opacity="0.8"/>
                             </g>
+
                             <!-- Computer Desk -->
                             <g>
-                                <rect x="240" y="160" width="120" height="80" fill="#1a1f3a"
-                                    stroke="rgba(0,212,255,0.4)" stroke-width="2" />
-                                <rect x="245" y="165" width="110" height="70" fill="#0a0e27"
-                                    stroke="rgba(0,212,255,0.6)" stroke-width="1" />
-                                <text x="300" y="205" font-size="20" text-anchor="middle"
-                                    fill="rgba(0,212,255,0.3)">💻</text>
+                                <rect x="240" y="160" width="120" height="80" fill="#1a1f3a" stroke="rgba(0,212,255,0.4)" stroke-width="2"/>
+                                <rect x="245" y="165" width="110" height="70" fill="#0a0e27" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+                                <text x="300" y="205" font-size="20" text-anchor="middle" fill="rgba(0,212,255,0.3)">💻</text>
                             </g>
+
                             <!-- Bookshelf -->
                             <g>
-                                <rect x="80" y="220" width="80" height="160" fill="#3a3a2a" stroke="rgba(0,212,255,0.2)"
-                                    stroke-width="1" />
-                                <line x1="90" y1="250" x2="160" y2="250" stroke="rgba(0,212,255,0.15)"
-                                    stroke-width="2" />
-                                <text x="120" y="300" font-size="18" text-anchor="middle"
-                                    fill="rgba(0,212,255,0.4)">📚</text>
+                                <rect x="80" y="220" width="80" height="160" fill="#3a3a2a" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+                                <line x1="190" y1="250" x2="160" y2="250" stroke="rgba(0,212,255,0.15)" stroke-width="2"/>
+                                <text x="120" y="300" font-size="18" text-anchor="middle" fill="rgba(0,212,255,0.4)">📚</text>
                             </g>
+
                             <!-- Media Center -->
                             <g>
-                                <rect x="460" y="140" width="90" height="140" fill="#2a1f3a"
-                                    stroke="rgba(255,0,110,0.3)" stroke-width="2" />
-                                <text x="505" y="210" font-size="24" text-anchor="middle"
-                                    fill="rgba(255,0,110,0.5)">🎬</text>
+                                <rect x="460" y="140" width="90" height="140" fill="#2a1f3a" stroke="rgba(255,0,110,0.3)" stroke-width="2"/>
+                                <text x="505" y="210" font-size="24" text-anchor="middle" fill="rgba(255,0,110,0.5)">🎮</text>
                             </g>
+
                             <!-- Plant -->
                             <g>
-                                <circle cx="140" cy="380" r="25" fill="#2a5a2a" opacity="0.7" />
-                                <text x="140" y="385" font-size="20" text-anchor="middle" fill="#4a8a4a">🌱</text>
+                                <circle cx="140" cy="380" r="25" fill="#2a5a2a" opacity="0.7"/>
+                                <text x="140" y="385" font-size="20" text-anchor="middle" fill="#4a8a4a">🌿</text>
                             </g>
                         </svg>
 
                         <!-- Interactive hotspots -->
-                        <button class="hotspot" data-section="projects" style="top: 35%; left: 50%;"
-                            aria-label="View Projects"></button>
-                        <button class="hotspot" data-section="skills" style="top: 50%; left: 20%;"
-                            aria-label="View Skills"></button>
-                        <button class="hotspot" data-section="creative" style="top: 40%; left: 85%;"
-                            aria-label="View Creative Work"></button>
-                        <button class="hotspot" data-section="about" style="top: 75%; left: 50%;"
-                            aria-label="About Me"></button>
+                        <button class="hotspot" data-section="projects" style="top: 35%; left: 50%;" aria-label="View Projects"></button>
+                        <button class="hotspot" data-section="skills" style="top: 50%; left: 20%;" aria-label="View Skills"></button>
+                        <button class="hotspot" data-section="about" style="top: 75%; left: 50%;" aria-label="About Me"></button>
+                    </div>
 
-                        <!-- Info panel -->
-                        <div class="hero-info" role="tooltip"></div>
+                    <!-- Info panel -->
+                    <div class="hero-info" role="tooltip">
+                        <div></div>
                     </div>
                 </div>
             </div>
@@ -1165,22 +1097,19 @@
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
                     <div class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">🛠️</div>
+                        <div class="skill-icon" aria-hidden="true">🔧</div>
                         <h3>Technical Support</h3>
-                        <p>Expert in system troubleshooting, hardware diagnostics, and IT infrastructure management.
-                            Proficient with Windows, Mac, networking, and enterprise support systems.</p>
+                        <p>Expert in system troubleshooting, hardware diagnostics, and IT infrastructure management. Proficient with Windows, Mac, networking, and enterprise support systems.</p>
                     </div>
                     <div class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">💻</div>
+                        <div class="skill-icon" aria-hidden="true">⚙️</div>
                         <h3>Programming & Game Logic</h3>
-                        <p>Specialized in full-stack development with Python, JavaScript, React, Flask, and database
-                            design. Experience building AR/VR applications using Unreal Engine blueprints.</p>
+                        <p>Specialized in full-stack development with Python, JavaScript, React, Flask, and database design. Experience building AR/VR applications using Unreal Engine blueprints.</p>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon" aria-hidden="true">🎨</div>
                         <h3>Creative & AR/VR</h3>
-                        <p>Certified in AR/VR development with Unreal Engine 5. Skilled in 3D modeling, animation, and
-                            cinematic storytelling.</p>
+                        <p>Certified in AR/VR development with Unreal Engine 5. Skilled in 3D modeling, animation, and cinematic storytelling.</p>
                     </div>
                 </div>
             </div>
@@ -1194,30 +1123,25 @@
                     <div class="project-card">
                         <div class="project-content">
                             <h3>Video Steganography</h3>
-                            <p>A secure communication tool that embeds hidden video files using Python and encryption
-                                protocols.</p>
+                            <p>A secure communication tool that embeds hidden video files using Python and encryption protocols.</p>
                             <div class="project-links">
-                                <a href="https://github.com/Riyasmanikodi" target="_blank"
-                                    rel="noopener noreferrer">GitHub</a>
+                                <a href="https://github.com/Riyasmanikodi" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-content">
-                            <h3>Farmer's E-Market</h3>
-                            <p>Platform enabling farmers to sell produce directly. Features product listings and
-                                delivery integration.</p>
+                            <h3>Farmers E-Market</h3>
+                            <p>Platform enabling farmers to sell produce directly. Features product listings and delivery integration.</p>
                             <div class="project-links">
-                                <a href="https://github.com/Riyasmanikodi" target="_blank"
-                                    rel="noopener noreferrer">GitHub</a>
+                                <a href="https://github.com/Riyasmanikodi" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-content">
                             <h3>3D Portfolio</h3>
-                            <p>Interactive resume website showcasing technical skills with real-time 3D visualization.
-                            </p>
+                            <p>Interactive resume website showcasing technical skills with real-time 3D visualization.</p>
                             <div class="project-links">
                                 <a href="#hero">Live Demo</a>
                             </div>
@@ -1233,9 +1157,7 @@
                 <div class="about-content">
                     <div class="about-text">
                         <h2>About Me</h2>
-                        <p>I'm a self-taught full-stack developer with a passion for creating immersive 3D experiences.
-                            With an MCA from Anna University and hands-on experience in AR/VR development, I bridge the
-                            gap between creative design and technical implementation.</p>
+                        <p>I'm a self-taught full-stack developer with a passion for creating immersive 3D experiences. With an MCA from Anna University and hands-on experience in AR/VR development, I bridge the gap between creative design and technical implementation.</p>
                         <div class="tech-stack">
                             <span class="tech-tag">React.js</span>
                             <span class="tech-tag">Python</span>
@@ -1246,6 +1168,7 @@
                             <span class="tech-tag">MySQL</span>
                         </div>
                     </div>
+
                     <div>
                         <h2 style="color: var(--color-primary); margin-bottom: 30px;">Experience Timeline</h2>
                         <div class="timeline">
@@ -1257,7 +1180,7 @@
                             <div class="timeline-item">
                                 <div class="timeline-year">2022 - 2024</div>
                                 <div class="timeline-title">IT Support Administrator</div>
-                                <div class="timeline-desc">Sify Technologies - Resolved 500 support tickets</div>
+                                <div class="timeline-desc">Sify Technologies - Resolved 500+ support tickets</div>
                             </div>
                             <div class="timeline-item">
                                 <div class="timeline-year">2020 - 2022</div>
@@ -1275,28 +1198,23 @@
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
                 <div class="contact-container">
-                    <!-- FORMSPREE FORM - Replace YOUR_FORM_ID with your actual Form ID from Formspree -->
                     <form action="https://formspree.io/f/mnneyevy" method="POST" class="contact-form" novalidate>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required aria-required="true"
-                                placeholder="Your name">
+                            <input type="text" id="name" name="name" required aria-required="true" placeholder="Your name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-required="true"
-                                placeholder="your.email@example.com">
+                            <input type="email" id="email" name="email" required aria-required="true" placeholder="your.email@example.com">
                             <small style="color: #a0a0a0; font-size: 12px;">Use a valid email address</small>
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required aria-required="true"
-                                placeholder="Message subject">
+                            <input type="text" id="subject" name="subject" required aria-required="true" placeholder="Message subject">
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" required aria-required="true"
-                                placeholder="Your message here..."></textarea>
+                            <textarea id="message" name="message" required aria-required="true" placeholder="Your message here..."></textarea>
                         </div>
                         <button type="submit" class="form-submit">Send Message</button>
                     </form>
@@ -1309,11 +1227,9 @@
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="https://github.com/Riyasmanikodi" target="_blank" rel="noopener noreferrer"
-                    aria-label="GitHub Profile">GitHub</a>
+                <a href="https://github.com/Riyasmanikodi" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">GitHub</a>
                 <a href="mailto:krayetosden@gmail.com" aria-label="Email">Email</a>
-                <a href="https://www.linkedin.com/in/riyas-manikodi" target="_blank" rel="noopener noreferrer"
-                    aria-label="LinkedIn Profile">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/riyas-manikodi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">LinkedIn</a>
             </div>
             <p>&copy; 2025 Riyas Manikodi. All rights reserved.</p>
         </div>
@@ -1321,14 +1237,13 @@
 
     <!-- JavaScript -->
     <script>
-        // CUSTOM CURSOR
+        /* CUSTOM CURSOR */
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-
             setTimeout(() => {
                 cursorFollower.style.left = e.clientX + 'px';
                 cursorFollower.style.top = e.clientY + 'px';
@@ -1340,7 +1255,7 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
         });
 
-        // SCROLL PROGRESS BAR
+        /* SCROLL PROGRESS BAR */
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1348,7 +1263,7 @@
             document.querySelector('.scroll-progress').style.width = scrolled + '%';
         });
 
-        // NAVIGATION - ACTIVE LINK & SCROLL BEHAVIOR
+        /* NAVIGATION - ACTIVE LINK */
         const nav = document.querySelector('nav');
 
         window.addEventListener('scroll', () => {
@@ -1368,16 +1283,19 @@
                 const element = document.getElementById(section);
                 const link = document.querySelector(`nav a[href="#${section}"]`);
 
-                if (element && link) {
+                if (element) {
                     const rect = element.getBoundingClientRect();
                     if (rect.top <= 150 && rect.bottom >= 150) {
                         navLinks.forEach((l) => l.classList.remove('active'));
-                        link.classList.add('active');
+                        if (link) link.classList.add('active');
                     }
                 }
             });
         }
 
+        updateActiveNav();
+
+        /* SMOOTH SCROLL */
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1388,7 +1306,7 @@
             });
         });
 
-        // INTERSECTION OBSERVER - FADE IN ANIMATIONS
+        /* INTERSECTION OBSERVER - FADE IN ANIMATIONS */
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -1402,32 +1320,11 @@
             observer.observe(el);
         });
 
-        // HOTSPOT INFO PANEL
+        /* HOTSPOT INFO PANEL */
         const roomInfo = {
-            projects: {
-                title: 'Projects',
-                text: 'Video Steganography, Farmer\'s E-Market, 3D portfolio with real-time visualization.',
-                link: '#projects',
-                linkText: 'View Projects'
-            },
-            skills: {
-                title: 'Skills',
-                text: 'Full-Stack Development (React, Python, Flask, MySQL) & AR/VR (Unreal Engine 5)',
-                link: '#skills',
-                linkText: 'See Skills'
-            },
-            creative: {
-                title: 'Creative Work',
-                text: 'Unreal Engine 5 · 3D Modeling · Animation · Cinematic Storytelling',
-                link: '#about',
-                linkText: 'Learn More'
-            },
-            about: {
-                title: 'About Me',
-                text: 'Full-Stack Developer · MCA Graduate · AR/VR Specialist · Technical Support Expert',
-                link: '#about',
-                linkText: 'My Story'
-            }
+            projects: { title: 'Projects', text: 'Video Steganography, Farmers E-Market, 3D portfolio with real-time visualization.', link: 'projects', linkText: 'View Projects' },
+            skills: { title: 'Skills', text: 'Full-Stack Development, React, Python, Flask, MySQL, AR/VR, Unreal Engine 5', link: 'skills', linkText: 'See Skills' },
+            about: { title: 'About Me', text: 'Full-Stack Developer, MCA Graduate, AR/VR Specialist, Technical Support Expert', link: 'about', linkText: 'My Story' }
         };
 
         const infoPanel = document.querySelector('.hero-info');
@@ -1438,11 +1335,7 @@
             if (!info) return;
 
             clearTimeout(hideTimeout);
-            infoPanel.innerHTML = `
-                <h3>${info.title}</h3>
-                <p>${info.text}</p>
-                <a href="${info.link}">${info.linkText}</a>
-            `;
+            infoPanel.innerHTML = `<h3>${info.title}</h3><p>${info.text}</p><a href="#${info.link}">${info.linkText}</a>`;
             infoPanel.classList.add('show');
         }
 
@@ -1467,21 +1360,22 @@
             clearTimeout(hideTimeout);
             infoPanel.classList.add('show');
         });
-
         infoPanel.addEventListener('mouseleave', hideInfoPanel);
 
-        // CONSOLE WELCOME MESSAGE
-        console.log('%c Portfolio Website Loaded Successfully!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
-        console.log('%c Developed by Riyas Manikodi', 'color: #ff006e; font-size: 14px;');
-        console.log('%c GitHub: https://github.com/Riyasmanikodi', 'color: #a0a0a0; font-size: 12px;');
-        console.log('%c Email: krayetosden@gmail.com', 'color: #00ff88; font-size: 12px;');
+        /* CONSOLE WELCOME MESSAGE */
+        console.log(
+            '%c Portfolio Website Loaded Successfully!',
+            'color: #00d4ff; font-size: 20px; font-weight: bold;'
+        );
+        console.log('%cDeveloped by Riyas Manikodi', 'color: #ff006e; font-size: 14px;');
+        console.log('%cGitHub: https://github.com/Riyasmanikodi', 'color: #a0a0a0; font-size: 12px;');
+        console.log('%cFormspree Contact Form Integration', 'color: #00ff88; font-size: 12px;');
 
-        // PERFORMANCE MONITORING
+        /* PERFORMANCE MONITORING */
         window.addEventListener('load', () => {
             const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
-            console.log(`%c Page loaded in ${loadTime}ms`, 'color: #00ff88; font-size: 12px;');
+            console.log('%c Page loaded in ' + loadTime + 'ms', 'color: #00ff88; font-size: 12px;');
         });
     </script>
 </body>
-
 </html>
