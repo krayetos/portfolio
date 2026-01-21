@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>RIYAS_MANIKODI_V21_MOBILE_SAFE</title>
+    <title>RIYAS_MANIKODI_V27_CLEAN</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -33,10 +33,9 @@
             --accent: #ffcc00;
             /* Yellow */
             --dark-bg: #000000;
-            --glass-panel: rgba(10, 20, 40, 0.7);
+            --glass-panel: rgba(10, 20, 40, 0.85);
         }
 
-        /* FIX: Use 100dvh to avoid mobile browser bars covering content */
         body {
             margin: 0;
             background: var(--dark-bg);
@@ -47,6 +46,49 @@
             transition: 0.5s;
             height: 100dvh;
             width: 100vw;
+            cursor: none;
+        }
+
+        /* CURSOR */
+        #cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: background 0.2s;
+        }
+
+        #cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        body.hovering #cursor-ring {
+            width: 50px;
+            height: 50px;
+            border-color: var(--secondary);
+            background: rgba(0, 243, 255, 0.1);
+            border-width: 2px;
+        }
+
+        body.hovering #cursor-dot {
+            background: var(--secondary);
         }
 
         canvas {
@@ -77,6 +119,7 @@
             justify-content: center;
             align-items: center;
             pointer-events: auto;
+            cursor: default;
         }
 
         .boot-text {
@@ -105,7 +148,7 @@
             box-shadow: 0 0 20px var(--secondary);
         }
 
-        /* MAIN UI LAYER (Use Dynamic Height) */
+        /* MAIN UI LAYER */
         .main-ui {
             display: none;
             opacity: 0;
@@ -116,7 +159,6 @@
             pointer-events: none;
         }
 
-        /* HEADER */
         .header {
             position: absolute;
             top: 30px;
@@ -156,12 +198,18 @@
             z-index: 100;
         }
 
+        .ctrl-group {
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+        }
+
         .ctrl-btn {
             border: 1px solid var(--secondary);
             color: var(--secondary);
             background: rgba(0, 0, 0, 0.8);
             padding: 8px 15px;
-            cursor: pointer;
+            cursor: none;
             font-family: 'Courier New', monospace;
             font-size: 12px;
             pointer-events: auto;
@@ -180,6 +228,97 @@
             color: #000;
             text-shadow: none;
             border-color: #fff;
+        }
+
+        /* WINDOW SYSTEM */
+        .window {
+            position: absolute;
+            background: rgba(5, 5, 10, 0.95);
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+            color: #ddd;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            pointer-events: auto;
+            backdrop-filter: blur(10px);
+            min-width: 300px;
+            min-height: 200px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .window.open {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .window-header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            cursor: grab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            user-select: none;
+        }
+
+        .window-title {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .window-controls span {
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .window-controls span:hover {
+            color: #fff;
+        }
+
+        .window-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* SINGLE TERMINAL */
+        #term-root {
+            width: 500px;
+            height: 350px;
+            left: 20%;
+            top: 20%;
+            border-color: var(--primary);
+            z-index: 50;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            margin-top: 10px;
+            color: inherit;
+            font-weight: bold;
+        }
+
+        .terminal-prompt {
+            margin-right: 10px;
+        }
+
+        .term-input {
+            background: transparent;
+            border: none;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            flex: 1;
+            outline: none;
+            cursor: none;
         }
 
         /* DROPDOWNS */
@@ -230,7 +369,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 8px;
-            cursor: pointer;
+            cursor: none;
             font-size: 12px;
             color: #aaa;
             transition: 0.3s;
@@ -239,6 +378,7 @@
         .radio-item input {
             margin-right: 10px;
             accent-color: currentColor;
+            cursor: none;
         }
 
         .radio-item input:checked+span {
@@ -247,7 +387,7 @@
             text-shadow: 0 0 8px currentColor;
         }
 
-        /* SIDE PANEL (PC) */
+        /* SIDE PANEL */
         .side-panel {
             position: absolute;
             left: 5%;
@@ -287,27 +427,6 @@
             flex-wrap: wrap;
         }
 
-        .cursor-blink {
-            display: inline-block;
-            width: 8px;
-            height: 18px;
-            background: currentColor;
-            margin-left: 5px;
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-
         .data-content {
             display: none;
         }
@@ -345,6 +464,7 @@
             font-size: 12px;
             width: 100%;
             transition: 0.3s;
+            cursor: text;
         }
 
         .cyber-input:focus {
@@ -364,7 +484,7 @@
             border: 1px solid var(--tertiary);
             padding: 10px;
             font-weight: bold;
-            cursor: pointer;
+            cursor: none;
             text-transform: uppercase;
             font-family: 'Courier New', monospace;
             transition: 0.3s;
@@ -390,6 +510,7 @@
             transition: 0.3s;
             opacity: 0;
             pointer-events: auto;
+            cursor: none;
         }
 
         .git-link:hover {
@@ -398,10 +519,10 @@
             box-shadow: 0 0 15px var(--secondary);
         }
 
-        /* NAV BAR (PC) */
+        /* NAV BAR */
         .nav-bar {
             position: absolute;
-            bottom: 40px;
+            bottom: 60px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -421,7 +542,7 @@
         }
 
         .nav-radio-group label {
-            cursor: pointer;
+            cursor: none;
             font-size: 14px;
             color: #888;
             font-weight: bold;
@@ -434,6 +555,7 @@
             margin-right: 8px;
             accent-color: var(--secondary);
             transform: scale(1.2);
+            cursor: none;
         }
 
         .nav-radio-group label:hover {
@@ -445,7 +567,68 @@
             text-shadow: 0 0 10px var(--secondary);
         }
 
-        /* --- MOBILE LAYOUT FIXES (IMPORTANT) --- */
+        #footer-credit {
+            position: fixed;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            font-family: 'Courier New', monospace;
+            z-index: 2000;
+            pointer-events: none;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .heart {
+            display: inline-block;
+            color: var(--tertiary);
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 5px var(--tertiary);
+            }
+
+            50% {
+                transform: scale(1.3);
+                text-shadow: 0 0 15px var(--tertiary);
+            }
+        }
+
+        .coded-by {
+            color: #888;
+        }
+
+        .credit-name {
+            font-weight: bold;
+            animation: rainbow 4s infinite linear;
+        }
+
+        @keyframes rainbow {
+            0% {
+                color: var(--primary);
+            }
+
+            33% {
+                color: var(--secondary);
+            }
+
+            66% {
+                color: var(--accent);
+            }
+
+            100% {
+                color: var(--primary);
+            }
+        }
+
+        /* MOBILE FIXES */
         body.mode-mobile .header {
             top: 60px;
             pointer-events: none;
@@ -464,9 +647,13 @@
             top: 15px;
         }
 
+        body.mode-mobile .ctrl-group {
+            gap: 5px;
+        }
+
         body.mode-mobile .ctrl-btn {
-            font-size: 10px;
-            padding: 8px 10px;
+            font-size: 9px;
+            padding: 6px 8px;
         }
 
         body.mode-mobile #config-panel {
@@ -481,45 +668,30 @@
 
         body.mode-mobile .side-panel {
             top: auto;
-            /* Fix: Raise the panel so it doesn't push down the nav bar */
-            bottom: 120px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
             height: auto;
             max-height: 40vh;
-            /* Prevent overflowing */
             overflow-y: auto;
             padding: 20px;
             background: rgba(5, 10, 15, 0.9);
             border-left: 2px solid var(--secondary);
         }
 
-        body.mode-mobile .section-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        body.mode-mobile .data-list {
-            font-size: 13px;
-        }
-
         body.mode-mobile .nav-bar {
-            /* Fix: Stick to bottom, ensure padding covers Safe Area */
-            position: absolute;
             bottom: 0;
-            padding-bottom: max(25px, env(safe-area-inset-bottom));
-            padding-top: 20px;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-top: 15px;
             width: 100%;
             left: 0;
-            /* Add gradient background so buttons are always readable over debris */
-            background: linear-gradient(to top, #000 50%, transparent 100%);
-            z-index: 1000;
+            background: linear-gradient(to top, #000 60%, transparent 100%);
         }
 
         body.mode-mobile .nav-radio-group {
-            padding: 10px 5px;
-            gap: 10px;
+            padding: 8px 5px;
+            gap: 8px;
             width: 95%;
             max-width: 400px;
             justify-content: center;
@@ -530,17 +702,36 @@
         }
 
         body.mode-mobile .nav-radio-group label span {
-            font-size: 10px;
-            letter-spacing: 1px;
+            font-size: 9px;
         }
 
-        body.mode-mobile .nav-radio-group input {
-            transform: scale(1);
-            margin-right: 4px;
+        body.mode-mobile #footer-credit {
+            bottom: 85px;
+            font-size: 9px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 0;
         }
 
-        /* Media Query for AUTO Detection - Applies Same Mobile Rules */
+        body.mode-mobile .window {
+            position: fixed;
+            width: 90% !important;
+            height: 300px !important;
+            left: 5% !important;
+            top: 10% !important;
+            transform: none !important;
+            border-width: 1px;
+        }
+
         @media (max-width: 768px) {
+            body:not(.mode-pc) {
+                cursor: auto;
+            }
+
+            body:not(.mode-pc) #cursor-dot,
+            body:not(.mode-pc) #cursor-ring {
+                display: none;
+            }
+
             body:not(.mode-pc) .header {
                 top: 60px;
             }
@@ -575,7 +766,7 @@
 
             body:not(.mode-pc) .side-panel {
                 top: auto;
-                bottom: 120px;
+                bottom: 130px;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 90%;
@@ -587,27 +778,18 @@
                 border-left: 2px solid var(--secondary);
             }
 
-            body:not(.mode-pc) .section-title {
-                font-size: 18px;
-                margin-bottom: 10px;
-            }
-
-            body:not(.mode-pc) .data-list {
-                font-size: 13px;
-            }
-
             body:not(.mode-pc) .nav-bar {
                 bottom: 0;
-                padding-bottom: max(25px, env(safe-area-inset-bottom));
-                padding-top: 20px;
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
+                padding-top: 15px;
                 width: 100%;
                 left: 0;
-                background: linear-gradient(to top, #000 50%, transparent 100%);
+                background: linear-gradient(to top, #000 60%, transparent 100%);
             }
 
             body:not(.mode-pc) .nav-radio-group {
-                padding: 10px 5px;
-                gap: 10px;
+                padding: 8px 5px;
+                gap: 8px;
                 width: 95%;
                 max-width: 400px;
                 justify-content: center;
@@ -618,13 +800,29 @@
             }
 
             body:not(.mode-pc) .nav-radio-group label span {
-                font-size: 10px;
+                font-size: 9px;
+            }
+
+            body:not(.mode-pc) #footer-credit {
+                bottom: 85px;
+                font-size: 9px;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 5px 0;
+            }
+
+            body:not(.mode-pc) .window {
+                width: 90% !important;
+                height: 300px !important;
+                left: 5% !important;
+                top: 15% !important;
             }
         }
     </style>
 </head>
 
 <body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
     <div class="vignette"></div>
 
     <div id="boot-screen">
@@ -632,14 +830,36 @@
         <div id="progress-wrap">
             <div id="bar"></div>
         </div>
-        <div style="color:#888; font-size: 12px; margin-top: 15px; letter-spacing: 2px;">ENTERING DEEP SPACE SECTOR V21
+        <div style="color:#888; font-size: 12px; margin-top: 15px; letter-spacing: 2px;">ENTERING DEEP SPACE SECTOR V27
+        </div>
+    </div>
+
+    <div id="term-root" class="window" style="display:none;">
+        <div class="window-header">
+            <span class="window-title" style="color:var(--primary)">ROOT@SYSTEM:~#</span>
+            <div class="window-controls"><span onclick="closeWindow('term-root')">_</span><span
+                    onclick="closeWindow('term-root')">X</span></div>
+        </div>
+        <div class="window-body" id="term-output">
+            <div>RIYAS_OS KERNEL V27.0 LOADED.</div>
+            <div>TYPE 'help' FOR COMMANDS.</div>
+            <br>
+        </div>
+        <div class="window-body" style="flex:0; padding-top:0;">
+            <div class="terminal-input-line">
+                <span class="terminal-prompt" style="color:var(--primary)">$</span>
+                <input type="text" class="term-input" id="input-root" autocomplete="off">
+            </div>
         </div>
     </div>
 
     <div class="main-ui" id="master-ui">
         <div class="top-controls">
-            <button class="ctrl-btn" onclick="toggleMenu('config-panel')">[ SYSTEM_CONFIG ]</button>
-            <button class="ctrl-btn right" onclick="toggleMenu('audio-panel')">[ AUDIO_CONFIG ]</button>
+            <div class="ctrl-group">
+                <button class="ctrl-btn" onclick="toggleMenu('config-panel')">[ SYSTEM ]</button>
+                <button class="ctrl-btn" onclick="openWindow('term-root')">[ TERMINAL ]</button>
+            </div>
+            <button class="ctrl-btn right" onclick="toggleMenu('audio-panel')">[ AUDIO ]</button>
         </div>
 
         <div id="config-panel" class="dropdown-panel">
@@ -759,11 +979,108 @@
                         onclick="loadProject('contact', 'INTERNAL')"><span>CONTACT</span></label>
             </div>
         </div>
+
+        <div id="footer-credit">
+            <span class="coded-by">CODED WITH</span>
+            <span class="heart">♥</span>
+            <span class="coded-by">BY</span>
+            <span class="credit-name">RIYAS MANIKODI</span>
+        </div>
     </div>
 
     <canvas id="stage"></canvas>
 
     <script>
+        // --- WINDOW MANAGER ---
+        let zIndexCounter = 50;
+
+        function openWindow(id) {
+            const win = document.getElementById(id);
+            win.style.display = 'flex';
+            setTimeout(() => { win.classList.add('open'); }, 10);
+            focusWindow(win);
+            playHoverSound();
+
+            if (id === 'term-root') document.getElementById('input-root').focus();
+        }
+
+        function closeWindow(id) {
+            const win = document.getElementById(id);
+            win.classList.remove('open');
+            setTimeout(() => { win.style.display = 'none'; }, 300);
+            playHoverSound();
+        }
+
+        function focusWindow(win) {
+            zIndexCounter++;
+            win.style.zIndex = zIndexCounter;
+        }
+
+        // DRAG LOGIC
+        document.querySelectorAll('.window').forEach(win => {
+            const header = win.querySelector('.window-header');
+            win.addEventListener('mousedown', () => focusWindow(win));
+
+            header.addEventListener('mousedown', (e) => {
+                let shiftX = e.clientX - win.getBoundingClientRect().left;
+                let shiftY = e.clientY - win.getBoundingClientRect().top;
+
+                function moveAt(pageX, pageY) {
+                    win.style.left = pageX - shiftX + 'px';
+                    win.style.top = pageY - shiftY + 'px';
+                }
+
+                function onMouseMove(event) { moveAt(event.pageX, event.pageY); }
+                document.addEventListener('mousemove', onMouseMove);
+
+                header.onmouseup = function () {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    header.onmouseup = null;
+                };
+            });
+        });
+
+        // --- TERMINAL LOGIC ---
+        const termInput = document.getElementById('input-root');
+        const termOutput = document.getElementById('term-output');
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.trim().toLowerCase();
+                const newLine = document.createElement('div');
+                newLine.innerHTML = `<span style="color:var(--primary); margin-right:10px;">$</span>${cmd}`;
+                termOutput.appendChild(newLine);
+
+                let res = "";
+                if (cmd === 'help') res = "CMDS: about, skills, projects, contact, clear, exit";
+                else if (cmd === 'about') res = "USER: RIYAS | ROLE: SYSADMIN";
+                else if (cmd === 'skills') res = "PYTHON, REACT, LINUX, UE5";
+                else if (cmd === 'projects') res = "STEGANOGRAPHY, E-MARKET";
+                else if (cmd === 'clear') { termOutput.innerHTML = ''; termInput.value = ''; return; }
+                else if (cmd === 'exit') { closeWindow('term-root'); return; }
+                else if (cmd !== '') res = "ERR: CMD NOT FOUND";
+
+                if (res) {
+                    const rDiv = document.createElement('div');
+                    rDiv.style.color = '#aaa'; rDiv.innerText = res;
+                    termOutput.appendChild(rDiv);
+                }
+                termInput.value = '';
+                termOutput.scrollTop = termOutput.scrollHeight;
+                playTypingSound();
+            }
+        });
+
+        // --- CURSOR ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px';
+            setTimeout(() => { cursorRing.style.left = e.clientX + 'px'; cursorRing.style.top = e.clientY + 'px'; }, 50);
+        });
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.matches('button, a, input, label, textarea, .window-header')) { document.body.classList.add('hovering'); } else { document.body.classList.remove('hovering'); }
+        });
+
         let audioCtx;
         let ambientNode = null, ambientGain = null;
         let lastOut = 0;
@@ -773,7 +1090,6 @@
             if (audioCtx.state === 'suspended') audioCtx.resume();
         }, { once: true });
 
-        // KEYBOARD SHORTCUTS
         window.addEventListener('keydown', (e) => {
             if (e.key === '1') document.querySelector('input[value="creative"]').click();
             if (e.key === '2') document.querySelector('input[value="technical"]').click();
@@ -789,7 +1105,6 @@
             playHoverSound();
         }
 
-        // --- AMBIENT SOUND GENERATOR ---
         function setAmbience(type) {
             if (!audioCtx) return;
             if (ambientGain) { ambientGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1); setTimeout(() => { if (ambientGain) ambientGain.disconnect(); }, 1000); }
@@ -870,6 +1185,11 @@
             else if (theme === 'ice') { root.style.setProperty('--primary', '#00ffff'); root.style.setProperty('--secondary', '#00bbff'); root.style.setProperty('--tertiary', '#0088ff'); }
             else if (theme === 'core') { root.style.setProperty('--primary', '#ff0000'); root.style.setProperty('--secondary', '#ff4400'); root.style.setProperty('--tertiary', '#aa0000'); }
             playHoverSound();
+
+            const pri = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+            document.getElementById('cursor-dot').style.background = pri;
+            document.getElementById('cursor-ring').style.borderColor = pri;
+
             const activeId = document.querySelector('.data-content.active').id.replace('c-', '');
             loadProject(activeId, 'INTERNAL', true);
         }
@@ -947,6 +1267,7 @@
             let c = (id === 'software') ? new THREE.Color(sec) : (id === 'contact') ? new THREE.Color(ter) : new THREE.Color(pri);
 
             accentLight.color = c; disk.material.color = c; starsMat.color = c; bloom.strength = (id === 'software' || id === 'contact') ? 2.0 : 1.5;
+            document.getElementById('cursor-ring').style.borderColor = c.getStyle();
 
             if (currentModel) { new TWEEN.Tween(currentModel.scale).to({ x: 0, y: 0, z: 0 }, 300).easing(TWEEN.Easing.Back.In).onComplete(() => { scene.remove(currentModel); createModel(id, c); }).start(); } else { createModel(id, c); }
         }
